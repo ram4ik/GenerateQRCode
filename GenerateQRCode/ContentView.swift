@@ -8,8 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var qrCodeUrl: String = ""
+    
     var body: some View {
-        Text("Hello, world!").padding()
+        VStack {
+            Text("Simple QR Code Generator")
+                .font(.title)
+            if !qrCodeUrl.isEmpty {
+                QRCodeView(url: qrCodeUrl)
+            } else {
+                Image(systemName: "qrcode")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .opacity(0.5)
+                    .padding()
+            }
+            Text("from URL: \(qrCodeUrl)")
+                .foregroundColor(.secondary)
+            TextField("URL address", text: $qrCodeUrl)
+                .padding()
+        }
     }
 }
 
